@@ -57,25 +57,25 @@ public class NetworkingJSONController {
 //        return event;
     }
 
-    @RequestMapping(path = "/getSingleEvent.json", method = RequestMethod.POST)
-    public Event singleEventView(/*eventID*/) {
-        return event;
-    }
-
-    @RequestMapping(path = "/joinEvent.json", method = RequestMethod.POST)
-    public List<User> joinEvent(/*userId, eventId*/) {
-        return event.listOfAttendees;
-    }
-
-    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
-    public List<Friend> requestContact(/*userId, friendId*/) {
-        return user.listOfFriends;
-    }
+//    @RequestMapping(path = "/getSingleEvent.json", method = RequestMethod.POST)
+//    public Event singleEventView(/*eventID*/) {
+//        return event;
+//    }
+//
+//    @RequestMapping(path = "/joinEvent.json", method = RequestMethod.POST)
+//    public List<User> joinEvent(/*userId, eventId*/) {
+//        return event.listOfAttendees;
+//    }
+//
+//    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
+//    public List<Friend> requestContact(/*userId, friendId*/) {
+//        return user.listOfFriends;
+//    }
 
     @RequestMapping(path = "/register.json", method = RequestMethod.POST)
-    public User register(/*@RequestBody User user email, firstName, lastName, password, techSkills*/) {
+    public LoginContainer register(/*@RequestBody User user email, firstName, lastName, password, techSkills*/) {
 
-        return errorMessage, User;
+        return myLoginCo;
     }
 
 
