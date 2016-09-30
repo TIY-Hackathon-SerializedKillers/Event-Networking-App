@@ -28,6 +28,9 @@ public class Event {
     @Column
     ArrayList<User> attendees;
 
+    @ManyToOne
+    UserEvent userEvent;
+
     public Event() {
     }
 
@@ -90,5 +93,13 @@ public class Event {
 
     public void setAttendees(ArrayList<User> attendees) {
         this.attendees = attendees;
+    }
+
+    public UserEvent getUserEvent() {
+        return userEvent;
+    }
+
+    public void setUserEvent(UserEvent userEvent) {
+        this.userEvent = userEvent;
     }
 }

@@ -12,35 +12,10 @@ public class UserEvent {
     @GeneratedValue
     int id;
 
-    @ManyToOne
-    User user;
+//    @ManyToOne
+//    User user;
 
-    @ManyToOne
-    Event event;
+//    @ManyToOne
+//    Event event;
 
-
-    //Getters and setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
 }
