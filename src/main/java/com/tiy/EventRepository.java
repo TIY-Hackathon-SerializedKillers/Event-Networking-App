@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface EventRepository extends CrudRepository<Event, Integer> {
 
-    List<Event> findByText(String text);
+//    List<Event> findByText(String text);
 
 }

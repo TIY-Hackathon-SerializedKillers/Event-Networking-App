@@ -26,9 +26,19 @@ public class NetworkingJSONController {
 
 
     @RequestMapping(path = "/register.json", method = RequestMethod.POST)
-    public User register(@RequestBody User user, String email, String firstName, String lastName, String password, String techSkills) {
+    //Problem -> can't call @RequestBody on multiple things! Just a single java object.
+    public LoginContainer register(@RequestBody User newUser) {
+        users.save(newUser);
 
-        return errorMessage, User;
+        User retrievedUser = users.findOne(newUser.getId());
+        LoginContainer myLoginContainer;
+        if (retrievedUser == null) {
+            myLoginContainer = new LoginContainer("Could not create user", null);
+        } else {
+            myLoginContainer = new LoginContainer(null, retrievedUser);
+        }
+
+        return myLoginContainer;
     }
 
 //    @RequestMapping(path = "/login.json", method = RequestMethod.POST)

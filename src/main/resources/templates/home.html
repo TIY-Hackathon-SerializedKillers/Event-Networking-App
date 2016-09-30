@@ -7,7 +7,22 @@
     <script src="js/networking-ng-controller.js"></script>
 </head>
 <body ng-controller="SampleController">
+
+{{! changing the mustache delimiter so it doesn't conflict with }}
+{{! the default angularjs delimeters - https://mustache.github.io/mustache.5.html for more info }}
+{{=<% %>=}}
+
 On event networking page!!
+<br/><br/>
+Email: <input type="text" ng-model="email"/> <br/>
+first name: <input type="text" ng-model="firstName"/> <br/>
+last name: <input type="text" ng-model="lastName"/> <br/>
+Password: <input type="text" ng-model="password"/> <br/>
+tech skills: <input type="text" ng-model="techSkills"/> <br/>
+<input type="button" ng-click="register(email, firstName, lastName, password, techSkills)" value="Send"/>
+
+<br/>
+{{loginContainer}}
 
 </body>
 </html>

@@ -43,6 +43,38 @@ public class EventNetworkingAppApplicationTests {
 	}
 
 //	@Test
+//	public void testRegisterUser() {
+//		System.out.println("Testing inserting user into db");
+//
+//		String testEmail = "test::email";
+//		String testPassword = "test::password";
+//		String testFirstName = "test::firstName";
+//		String testLastName = "test::lastName";
+//		String testTechSkills = "test::techSkills";
+//
+//
+//
+//		User testUser = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
+//		users.save(testUser);
+//
+//		NetworkingJSONController jsonController  = new NetworkingJSONController();
+//
+//		jsonController.register(testUser);
+//
+//
+////		assertEquals(1, users.count());
+//		User retrievedUser = users.findOne(testUser.getId());
+//		assertNotNull(retrievedUser);
+//
+//		users.delete(testUser);
+////		assertEquals(0, users.count());
+//		retrievedUser = users.findOne(testUser.getId());
+//		assertNull(retrievedUser);
+//
+//	}
+
+
+//	@Test
 //	public void testUserInsert() {
 //		System.out.println("Putting a test user into db");
 //
