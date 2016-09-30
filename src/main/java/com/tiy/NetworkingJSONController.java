@@ -82,27 +82,27 @@ public class NetworkingJSONController {
         return myLoginContainer; //make a new container class to handle this
     }
 
-    @RequestMapping(path = "/addEvent.json", method = RequestMethod.POST)
-    public List<Event> addEvent(@RequestBody Event event/*name, location, date, user*/) throws Exception{
-
-        List<Event> eventList = new ArrayList<Event>();
-        Iterable<Event> allEvents = events.findAll();
-        for (Event event : allEvents) {
-            eventList.add(event);
-        }
-        return eventList;
-
-//        User user = (User)session.getAttribute("user");
+//    @RequestMapping(path = "/addEvent.json", method = RequestMethod.POST)
+//    public List<Event> addEvent(@RequestBody Event event/*name, location, date, user*/) throws Exception{
 //
-//        if (user == null) {
-//            throw new Exception("Unable to add event.");
+//        List<Event> eventList = new ArrayList<Event>();
+//        Iterable<Event> allEvents = events.findAll();
+//        for (Event event : allEvents) {
+//            eventList.add(event);
 //        }
-//        event.userEvent = user;
+//        return eventList;
 //
-//        events.save(event);
-//
-//        return event;
-    }
+////        User user = (User)session.getAttribute("user");
+////
+////        if (user == null) {
+////            throw new Exception("Unable to add event.");
+////        }
+////        event.userEvent = user;
+////
+////        events.save(event);
+////
+////        return event;
+//    }
 
 //    @RequestMapping(path = "/getSingleEvent.json", method = RequestMethod.POST)
 //    public Event singleEventView(/*eventID*/) {

@@ -14,6 +14,9 @@ public class EventNetworkingAppApplicationTests {
 	@Autowired
 	UserRepository users;
 
+	@Autowired
+	EventRepository events;
+
 	@Test
 	public void contextLoads() {
 	}
@@ -87,6 +90,20 @@ public class EventNetworkingAppApplicationTests {
 //		User testUser = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
 //		users.save(testUser);
 //
+//	}
+
+//	@Test
+//	public void testEventInsert() {
+//		System.out.println("Putting a test event into db");
+//
+//		String testName = "testEvent";
+//		String testLocation = "testLocation";
+//		String testDate = "1/1/16";
+//		String testTime = "12:00";
+//		String testTechSkills = "testSkills";
+//
+//		Event testEvent = new Event(testName, testLocation, testDate, testTime);
+//		events.save(testEvent);
 //	}
 
 
