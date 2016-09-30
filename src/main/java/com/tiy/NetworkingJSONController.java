@@ -41,13 +41,32 @@ public class NetworkingJSONController {
         return myLoginContainer;
     }
 
-//    @RequestMapping(path = "/login.json", method = RequestMethod.POST)
-//    public User login(/*email, password*/) {
-//
-//
-//        return /*errorMessage, User*/; //make a new container class to handle this
-//    }
-//
+    @RequestMapping(path = "/login.json", method = RequestMethod.POST)
+    public LoginContainer login(@RequestBody User user /*String email, String password*/) throws Exception {
+
+        LoginContainer myLoginContainer = new LoginContainer();
+
+        if (user.email == null) {
+            throw new Exception("The information entered was incorrect");
+        } else if (user.email != null) {
+            User thisUser = users.findByEmail(user.email);
+            if (thisUser == null) {
+                myLoginContainer.setErrorMessage("User does not have account");
+                myLoginContainer.setUser(null);
+            } else {
+                if (!user.password.equals(thisUser.password)) {
+                    myLoginContainer.setErrorMessage("Password does not match");
+                    myLoginContainer.setUser(null);
+                } else {
+                    myLoginContainer.setErrorMessage(null);
+                    myLoginContainer.setUser(thisUser);
+                }
+            }
+        }
+
+        return myLoginContainer; //make a new container class to handle this
+    }
+
 //    @RequestMapping(path = "/addEvent.json", method = RequestMethod.POST)
 //    public List<Event> addEvent(HttpSession session, @RequestBody Event event/*name, location, date, user*/) throws Exception{
 //

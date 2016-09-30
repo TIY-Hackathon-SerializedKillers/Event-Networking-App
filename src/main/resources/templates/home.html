@@ -15,14 +15,22 @@
 On event networking page!!
 <br/><br/>
 Email: <input type="text" ng-model="email"/> <br/>
-first name: <input type="text" ng-model="firstName"/> <br/>
-last name: <input type="text" ng-model="lastName"/> <br/>
+First name: <input type="text" ng-model="firstName"/> <br/>
+Last name: <input type="text" ng-model="lastName"/> <br/>
 Password: <input type="text" ng-model="password"/> <br/>
-tech skills: <input type="text" ng-model="techSkills"/> <br/>
+Tech skills: <input type="text" ng-model="techSkills"/> <br/>
 <input type="button" ng-click="register(email, firstName, lastName, password, techSkills)" value="Send"/>
 
 <br/>
 {{loginContainer}}
+
+<br/><br/><br/><br/><br/><br/><br/>
+OR login to your existing account:<br/>
+Email: <input type="text" ng-model="loginEmail"/> <br/>
+Password: <input type="text" ng-model="loginPassword"/> <br/>
+<input type="button" ng-click="login(loginEmail, loginPassword)" value="Send"/>
+
+{{loginContainerForLogin}}
 
 </body>
 </html>
