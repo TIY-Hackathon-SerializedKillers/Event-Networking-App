@@ -82,6 +82,17 @@ public class NetworkingJSONController {
         return myLoginContainer; //make a new container class to handle this
     }
 
+    @RequestMapping(path = "/getAllEvents.json", method = RequestMethod.GET)
+    public ArrayList<Event> getAllEvents() {
+        Iterable<Event> listOfEvents = events.findAll();
+        ArrayList<Event> allEvents = new ArrayList<Event>();
+        for (Event event : listOfEvents) {
+            allEvents.add(event);
+        }
+        return allEvents;
+    }
+
+
 //    @RequestMapping(path = "/addEvent.json", method = RequestMethod.POST)
 //    public List<Event> addEvent(@RequestBody Event event/*name, location, date, user*/) throws Exception{
 //
@@ -108,7 +119,7 @@ public class NetworkingJSONController {
 //    public Event singleEventView(/*eventID*/) {
 //        return event;
 //    }
-//
+
 //    @RequestMapping(path = "/joinEvent.json", method = RequestMethod.POST)
 //    public List<User> joinEvent(/*userId, eventId*/) {
 //        return event.listOfAttendees;
