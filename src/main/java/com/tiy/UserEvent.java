@@ -18,7 +18,7 @@ public class UserEvent {
     @ManyToOne
     Event event;
 
-    
+
     //Getters and setters
     public int getId() {
         return id;
