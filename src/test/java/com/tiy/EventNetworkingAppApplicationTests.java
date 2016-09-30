@@ -42,20 +42,20 @@ public class EventNetworkingAppApplicationTests {
 
 	}
 
-	@Test
-	public void testUserInsert() {
-		System.out.println("Putting a test user into db");
-
-		String testEmail = "test@tiy.com";
-		String testPassword = "password";
-		String testFirstName = "testDonald";
-		String testLastName = "testGowens";
-		String testTechSkills = "Java master EXTRAORDINAIRE!!!!";
-
-		User testUser = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
-		users.save(testUser);
-
-	}
+//	@Test
+//	public void testUserInsert() {
+//		System.out.println("Putting a test user into db");
+//
+//		String testEmail = "test@tiy.com";
+//		String testPassword = "password";
+//		String testFirstName = "testDonald";
+//		String testLastName = "testGowens";
+//		String testTechSkills = "Java master EXTRAORDINAIRE!!!!";
+//
+//		User testUser = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
+//		users.save(testUser);
+//
+//	}
 
 
 
