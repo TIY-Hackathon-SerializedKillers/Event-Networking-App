@@ -41,6 +41,11 @@ public class User {
         this.techSkills = techSkills;
     }
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     //Getters and setters
     public int getId() {
         return id;

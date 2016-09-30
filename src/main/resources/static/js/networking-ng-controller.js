@@ -24,6 +24,26 @@ angular.module('NetworkingAngularApp', [])
                     });
         };
 
+        $scope.login = function(loginEmail, loginPassword) {
+            console.log("In login function in ng controller");
+
+            //Make a container
+            var returningUser = {
+                email: loginEmail,
+                password: loginPassword
+            }
+
+            $http.post("/login.json", returningUser)
+                .then(
+                    function successCallback(response) {
+                        console.log(response.data);
+                        console.log("Adding data to scope");
+                        $scope.loginContainerForLogin = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log("Unable to get data...");
+                    });
+        };
 
 
 
