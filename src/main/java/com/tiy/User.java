@@ -27,8 +27,8 @@ public class User {
     @Column
     String techSkills;
 
-    @ManyToOne
-    UserEvent userEvent;
+//    @ManyToOne
+//    UserEvent userEvent;
 
     public User() {
     }
@@ -88,13 +88,5 @@ public class User {
 
     public void setTechSkills(String techSkills) {
         this.techSkills = techSkills;
-    }
-
-    public UserEvent getUserEvent() {
-        return userEvent;
-    }
-
-    public void setUserEvent(UserEvent userEvent) {
-        this.userEvent = userEvent;
     }
 }

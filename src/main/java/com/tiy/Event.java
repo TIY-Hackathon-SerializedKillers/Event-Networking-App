@@ -28,8 +28,8 @@ public class Event {
     @Column
     ArrayList<User> attendees;
 
-    @ManyToOne
-    UserEvent userEvent;
+//    @ManyToOne
+//    UserEvent userEvent;
 
     public Event() {
     }
@@ -95,11 +95,4 @@ public class Event {
         this.attendees = attendees;
     }
 
-    public UserEvent getUserEvent() {
-        return userEvent;
-    }
-
-    public void setUserEvent(UserEvent userEvent) {
-        this.userEvent = userEvent;
-    }
 }
