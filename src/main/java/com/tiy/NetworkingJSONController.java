@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by jessicatracy on 9/29/16.
  */
@@ -40,6 +43,19 @@ public class NetworkingJSONController {
 
         return myLoginContainer;
     }
+
+    @RequestMapping(path = "/viewusers.json", method = RequestMethod.GET)
+    //Problem -> can't call @RequestBody on multiple things! Just a single java object.
+    public List<User> getUsers() {
+
+        List<User> userList = new ArrayList<>();
+        Iterable <User> allUsers = users.findAll();
+        for (User user : allUsers) {
+            userList.add(user);
+        }
+        return userList;
+    }
+
 
     @RequestMapping(path = "/login.json", method = RequestMethod.POST)
     public LoginContainer login(@RequestBody User user /*String email, String password*/) throws Exception {
