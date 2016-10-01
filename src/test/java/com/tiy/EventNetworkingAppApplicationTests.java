@@ -55,34 +55,43 @@ public class EventNetworkingAppApplicationTests {
 
 	}
 
-//	@Test
-//	public void testConnectUser(){
-//
-//		System.out.println("Testing inserting user into db");
-//
-//		String testEmail = "test::email";
-//		String testPassword = "test::password";
-//		String testFirstName = "test::firstName";
-//		String testLastName = "test::lastName";
-//		String testTechSkills = "test::techSkills";
-//
-//		User testUser = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
-//		users.save(testUser);
-//
-//		System.out.println("User added: " + testUser);
-//
-//		testJSONController.requestContact(
-//
-//
-//
-//
-////		Delete User
-//		User retrievedUser = users.findOne(testUser.getId());
-//		users.delete(testUser);
-//		retrievedUser = users.findOne(testUser.getId());
-//		assertNull(retrievedUser);
-//
-//	}
+	@Test
+	public void testConnectUser(){
+
+		System.out.println("Testing inserting user into db");
+
+		String testEmail = "friendTest::email";
+		String testPassword = "friendTest::password";
+		String testFirstName = "friendTest::firstName";
+		String testLastName = "friendTest::lastName";
+		String testTechSkills = "friendTest::techSkills";
+
+		User testUser = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
+		users.save(testUser);
+
+		String friendTestEmail = "friend2Test::email";
+		String friendTestPassword = "friend2Test::password";
+		String friendTestFirstName = "friend2Test::firstName";
+		String friendTestLastName = "friend2Test::lastName";
+		String friendTestTechSkills = "friend2Test::techSkills";
+
+		User testFriend = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
+		users.save(testUser);
+
+		System.out.println("User added: " + testUser);
+
+//		testJSONController.requestContact();
+
+
+
+
+//		Delete User
+		User retrievedUser = users.findOne(testUser.getId());
+		users.delete(testUser);
+		retrievedUser = users.findOne(testUser.getId());
+		assertNull(retrievedUser);
+
+	}
 
 //	@Test
 //	public void testRegisterUser() {
