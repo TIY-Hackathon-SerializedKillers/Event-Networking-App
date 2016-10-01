@@ -197,6 +197,9 @@ public class NetworkingJSONController {
     public ArrayList<Friend> requestContact(@RequestBody FriendConnectionContainer friendConnectionContainer) throws Exception {
         //Find USER in users based on userID -- just to make sure valid
         User user = users.findOne(friendConnectionContainer.getUserId());
+//        thisUser = users.findOne(friendConnectionContainer.getUserId());
+
+
         //Find FRIEND in users based on userID -- just to make sure valid
         User friend = users.findOne(friendConnectionContainer.getFriendId());
         if (user == null) {
