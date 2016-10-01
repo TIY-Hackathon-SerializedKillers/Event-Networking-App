@@ -121,9 +121,6 @@ public class EventNetworkingAppApplicationTests {
 
 
 
-
-
-
 /******* The following methods are just for inserting test data into the database. ***********/
 /******* They are not actually unit tests. ***************************************************/
 
