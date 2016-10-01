@@ -18,6 +18,14 @@ public class UserEvent {
     @ManyToOne
     Event event;
 
+    public UserEvent() {
+    }
+
+    public UserEvent(User user, Event event) {
+        this.user = user;
+        this.event = event;
+    }
+
     //Getters and setters
     public int getId() {
         return id;

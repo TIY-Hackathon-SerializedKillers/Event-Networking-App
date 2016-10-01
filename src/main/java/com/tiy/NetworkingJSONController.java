@@ -129,14 +129,15 @@ public class NetworkingJSONController {
 
     // What we need from Dan: container holding int userId and int eventId
     @RequestMapping(path = "/joinEvent.json", method = RequestMethod.POST)
-    public ArrayList<User> joinEvent(@RequestBody UserEvent userEvent) {
-        userEvents.save(userEvent);
-
+    public ArrayList<User> joinEvent(@RequestBody IDContainer idContainer) {
         //use userId to go get userJoiningEvent
-        User userJoiningEvent = users.findOne(userEvent.getUser().getId());
-
+        User userJoiningEvent = users.findOne(idContainer.getUserId());
         //use eventId to go get eventBeingJoined
-        Event eventBeingJoined = events.findOne(userEvent.getEvent().getId());
+        Event eventBeingJoined = events.findOne(idContainer.getEventId());
+
+        //Save user and event connection to userEvents table in db
+        UserEvent userEvent = new UserEvent(userJoiningEvent, eventBeingJoined);
+        userEvents.save(userEvent);
 
         //add userJoiningEvent to eventBeingJoined's list of attendees
         eventBeingJoined.addToAttendees(userJoiningEvent);

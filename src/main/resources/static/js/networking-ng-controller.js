@@ -68,6 +68,28 @@ angular.module('NetworkingAngularApp', [])
                      });
          };
 
+        $scope.joinEvent = function(myUserId, eventIWantToJoinId) {
+             console.log("In joinEvent function in ng controller");
+
+             //Make a container
+             var newUserEvent = {
+                  userId: myUserId,
+                  eventId: eventIWantToJoinId
+             }
+
+             $http.post("/joinEvent.json", newUserEvent)
+                  .then(
+                     function successCallback(response) {
+                         console.log(response.data);
+                         console.log("Adding data to scope");
+                         // Returns a list of attendees
+                         $scope.eventAttendees = response.data;
+                     },
+                     function errorCallback(response) {
+                         console.log("Unable to get data...");
+                     });
+        };
+
 
 
 

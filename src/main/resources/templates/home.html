@@ -24,7 +24,7 @@ Tech skills: <input type="text" ng-model="techSkills"/> <br/>
 <br/>
 {{loginContainer}}
 
-<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 OR login to your existing account:<br/>
 Email: <input type="text" ng-model="loginEmail"/> <br/>
 Password: <input type="text" ng-model="loginPassword"/> <br/>
@@ -33,7 +33,7 @@ Password: <input type="text" ng-model="loginPassword"/> <br/>
 {{loginContainerForLogin}}
 
 
-<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 Add an event:<br/>
 Event name: <input type="text" ng-model="newEventName"/> <br/>
 Location: <input type="text" ng-model="newEventLocation"/> <br/>
@@ -47,5 +47,16 @@ All Events: <br/>
     {{currentEvent}}
 </span>
 
+<br/><br/><br/><br/><br/>
+Join an event: (Note: just for testing. Can get these from /viewusers.json and /getAllEvents.json)<br/>
+Your user id: <input type="number" ng-model="myUserId"/>
+Event id: <input type="number" ng-model="eventIWantToJoinId"/>
+<input type="button" ng-click="joinEvent(myUserId, eventIWantToJoinId)" value="Join"/> <br/>
+
+<br/>
+Updated attendees at this event: <br/>
+<span ng-repeat="currentAttendee in eventAttendees">
+    {{currentAttendee}}
+</span>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class Event {
     String time;
 
     @Column
-    ArrayList<User> attendees;
+    ArrayList<User> attendees = new ArrayList<>();
 
 //    @ManyToOne
 //    UserEvent userEvent;
