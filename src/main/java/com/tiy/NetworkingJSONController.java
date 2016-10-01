@@ -27,7 +27,7 @@ public class NetworkingJSONController {
     @Autowired
     EventRepository events;
 
-
+    // What we need from Dan: container holding user info: String email, String password, String firstName, String lastName, String techSkills
     @RequestMapping(path = "/register.json", method = RequestMethod.POST)
     //Problem -> can't call @RequestBody on multiple things! Just a single java object.
     public LoginContainer register(@RequestBody User newUser) {
@@ -56,7 +56,7 @@ public class NetworkingJSONController {
         return userList;
     }
 
-
+    // What we need from Dan: container holding String email and String password
     @RequestMapping(path = "/login.json", method = RequestMethod.POST)
     public LoginContainer login(@RequestBody User user /*String email, String password*/) throws Exception {
 
@@ -82,6 +82,7 @@ public class NetworkingJSONController {
         return myLoginContainer; //make a new container class to handle this
     }
 
+    // What we need from Dan: nothing!
     @RequestMapping(path = "/getAllEvents.json", method = RequestMethod.GET)
     public ArrayList<Event> getAllEvents() {
         Iterable<Event> listOfEvents = events.findAll();
@@ -94,8 +95,9 @@ public class NetworkingJSONController {
 
 // This is where we stopped on Friday evening.
 
+    // What we need from Dan: container holding event info: String name, String location, String date, String time (will have an empty list of attendees when first created)
     @RequestMapping(path = "/addEvent.json", method = RequestMethod.POST)
-    public List<Event> addEvent(@RequestBody Event event/*name, location, date, user*/) throws Exception{
+    public List<Event> addEvent(@RequestBody Event event) throws Exception{
         events.save(event);
 
         List<Event> eventList = new ArrayList<Event>();
@@ -117,6 +119,7 @@ public class NetworkingJSONController {
 //        return event;
     }
 
+    // What we need from Dan: Just int eventId
     @RequestMapping(path = "/getSingleEvent.json", method = RequestMethod.POST)
     public Event singleEventView(@RequestBody int eventID) {
         Event event = events.findOne(eventID);
@@ -124,9 +127,17 @@ public class NetworkingJSONController {
         return event;
     }
 
+    // What we need from Dan: container holding int userId and int eventId
     @RequestMapping(path = "/joinEvent.json", method = RequestMethod.POST)
-    public List<User> joinEvent(/*userId, eventId*/) {
-        return event.listOfAttendees;
+    public List<User> joinEvent(@RequestBody UserEvent userEvent) {
+        userEvents.save(userEvent);
+        //use userId to go get userJoiningEvent
+        //use eventId to go get eventBeingJoined
+        //add userJoiningEvent to eventBeingJoined's list of attendees
+        //resave eventBeingJoined with updated list of attendees
+        //return the event's list of attendees
+
+//        return event.listOfAttendees;
     }
 
 //    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
