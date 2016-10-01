@@ -17,6 +17,9 @@ public class EventNetworkingAppApplicationTests {
 	@Autowired
 	EventRepository events;
 
+	@Autowired
+	UserEventRepository userEvents;
+
 	@Test
 	public void contextLoads() {
 	}
@@ -115,6 +118,12 @@ public class EventNetworkingAppApplicationTests {
 //
 //		Event testEvent = new Event(testName, testLocation, testDate, testTime);
 //		events.save(testEvent);
+//	}
+
+
+// 	@Test
+//	public void deleteExtraTestDonaldsInUserEvents() {
+//		userEvents.deleteAll();
 //	}
 
 
