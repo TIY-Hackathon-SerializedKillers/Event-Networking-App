@@ -44,7 +44,7 @@ public class NetworkingJSONController {
         return myLoginContainer;
     }
 
-    @RequestMapping(path = "/viewusers.json", method = RequestMethod.GET)
+    @RequestMapping(path = "/viewUsers.json", method = RequestMethod.GET)
     //Problem -> can't call @RequestBody on multiple things! Just a single java object.
     public List<User> getUsers() {
 
@@ -129,7 +129,7 @@ public class NetworkingJSONController {
 
     // What we need from Dan: container holding int userId and int eventId
     @RequestMapping(path = "/joinEvent.json", method = RequestMethod.POST)
-    public ArrayList<User> joinEvent(@RequestBody IDContainer idContainer) {
+    public ArrayList<User> joinEvent(@RequestBody UserIDEventIDConnectionContainer idContainer) {
         //use userId to go get userJoiningEvent
         User userJoiningEvent = users.findOne(idContainer.getUserId());
         //use eventId to go get eventBeingJoined
@@ -172,13 +172,61 @@ public class NetworkingJSONController {
         return listOfUserEvents;
     }
 
+    // What we need from Dan: container (FriendConnectionContainer object) holding userId and friendID
+    // PROBLEM: RIGHT NOW THIS IS NOT ASKING THE USER TO GRANT PERMISSION. WILL NEED 2 ENDPOINTS I THINK.
+    // This one is just adding the friend connection in friend database and returning the user's friends, so
+    // it's assuming that permission was already granted.
+    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
+    public ArrayList<Friend> requestContact(@RequestBody FriendConnectionContainer friendConnectionContainer) throws Exception {
+        //Find USER in users based on userID -- just to make sure valid
+        User user = users.findOne(friendConnectionContainer.getUserId());
+        //Find FRIEND in users based on userID -- just to make sure valid
+        User friend = users.findOne(friendConnectionContainer.getFriendId());
+        if (user == null) {
+            throw new Exception("Requested user is not in database");
+        } else if (friend == null) {
+            throw new Exception("Requested friend is not in database");
+        } else {
+            //Make a new Friend object with userId from db and friendId from db
+            Friend myFriend = new Friend(user);
+            //save to friends table
+            friends.save(myFriend);
+            //return the user's list of friends by querying table
+            Iterable<Friend> allMyFriends = friends.findAllByUserId(user.getId());
+            ArrayList<Friend> listOfMyFriends = new ArrayList<>();
+            for (Friend currentFriend : allMyFriends) {
+                listOfMyFriends.add(currentFriend);
+            }
+            return listOfMyFriends;
+        }
+    }
 
-//    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
-//    public List<Friend> requestContact(/*userId, friendId*/) {
-//        return user.listOfFriends;
+//    @RequestMapping(path = "/viewFriends.json", method = RequestMethod.GET)
+//    public ArrayList<Friend> viewFriends(@RequestBody FriendConnectionContainer friendConnectionContainer) throws Exception {
+//        //Find USER in users based on userID -- just to make sure valid
+//        User user = users.findOne(friendConnectionContainer.getUserId());
+//        //Find FRIEND in users based on userID -- just to make sure valid
+//        User friend = users.findOne(friendConnectionContainer.getFriendId());
+//        if (user == null) {
+//            throw new Exception("Requested user is not in database");
+//        } else if (friend == null) {
+//            throw new Exception("Requested friend is not in database");
+//        } else {
+//            //Make a new Friend object with userId from db and friendId from db
+//            Friend myFriend = new Friend(user);
+//            //save to friends table
+//            friends.save(myFriend);
+//            //return the user's list of friends by querying table
+//            Iterable<Friend> allMyFriends = friends.findAllByUserId(user.getId());
+//            ArrayList<Friend> listOfMyFriends = new ArrayList<>();
+//            for (Friend currentFriend : allMyFriends) {
+//                listOfMyFriends.add(currentFriend);
+//            }
+//            return listOfMyFriends;
+//        }
 //    }
-//
-//
+
+
 
 
 

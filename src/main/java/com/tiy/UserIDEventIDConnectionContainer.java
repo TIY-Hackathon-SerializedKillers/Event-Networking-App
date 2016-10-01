@@ -3,14 +3,14 @@ package com.tiy;
 /**
  * Created by jessicatracy on 10/1/16.
  */
-public class IDContainer {
+public class UserIDEventIDConnectionContainer {
     int userId;
     int eventId;
 
-    public IDContainer() {
+    public UserIDEventIDConnectionContainer() {
     }
 
-    public IDContainer(int userId, int eventId) {
+    public UserIDEventIDConnectionContainer(int userId, int eventId) {
         this.userId = userId;
         this.eventId = eventId;
     }

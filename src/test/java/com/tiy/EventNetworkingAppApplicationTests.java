@@ -18,6 +18,9 @@ public class EventNetworkingAppApplicationTests {
 	EventRepository events;
 
 	@Autowired
+	FriendRepository friends;
+
+	@Autowired
 	UserEventRepository userEvents;
 
 	@Test
@@ -126,6 +129,17 @@ public class EventNetworkingAppApplicationTests {
 //		userEvents.deleteAll();
 //	}
 
+ 	@Test
+	public void testInsertANewUserTestFriendForTestDonald() {
+ 		User testUser = users.findOne(20);
+		Friend testFriend = new Friend(testUser);
+		friends.save(testFriend);
+	}
+
+//	@Test
+//	public void deleteFriendPerson() {
+//		friends.delete(34);
+//	}
 
 
 }

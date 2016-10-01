@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "friends")
-public class Friend {
+public class Friend extends User {
     @Id
     @GeneratedValue
     int id;
@@ -15,11 +15,15 @@ public class Friend {
     @ManyToOne
     User user;
 
+    @ManyToOne
+    User friend;
+
     public Friend() {
     }
 
     public Friend(User user) {
         this.user = user;
+//        this.friend = this;
     }
 
     //Getters and setters
@@ -37,5 +41,13 @@ public class Friend {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getFriend() {
+        return friend;
+    }
+
+    public void setFriend(User friend) {
+        this.friend = friend;
     }
 }
