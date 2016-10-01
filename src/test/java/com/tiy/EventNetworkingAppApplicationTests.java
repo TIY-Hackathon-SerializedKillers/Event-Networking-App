@@ -26,6 +26,8 @@ public class EventNetworkingAppApplicationTests {
 	UserEventRepository userEvents;
 
 	NetworkingJSONController testJSONController = new NetworkingJSONController();
+	FriendConnectionContainer friendConnectionContainer = new FriendConnectionContainer();
+
 
 	@Test
 	public void contextLoads() {
@@ -69,19 +71,31 @@ public class EventNetworkingAppApplicationTests {
 		User testUser = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
 		users.save(testUser);
 
+		System.out.println("User added: " + testUser);
+
 		String friendTestEmail = "friend2Test::email";
 		String friendTestPassword = "friend2Test::password";
 		String friendTestFirstName = "friend2Test::firstName";
 		String friendTestLastName = "friend2Test::lastName";
 		String friendTestTechSkills = "friend2Test::techSkills";
 
-		User testFriend = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
-		users.save(testUser);
+		User testFriend = new User(friendTestEmail, friendTestPassword, friendTestFirstName, friendTestLastName, friendTestTechSkills);
+		users.save(testFriend);
 
-		System.out.println("User added: " + testUser);
+		System.out.println("User added: " + testFriend);
 
-//		testJSONController.requestContact();
+		try {
+			testJSONController.requestContact(friendConnectionContainer);
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
 
+		System.out.println("Connection established");
+
+		friends.findAllByUserId(testFriend.getId());
+		System.out.println("Friends for userID " + testFriend.getId() + ": " + friends.findAllByUserId(testFriend.getId()));
+
+//		assertTrue();
 
 
 
@@ -91,6 +105,10 @@ public class EventNetworkingAppApplicationTests {
 		retrievedUser = users.findOne(testUser.getId());
 		assertNull(retrievedUser);
 
+		User retrievedFriend = users.findOne(testFriend.getId());
+		users.delete(testFriend);
+		retrievedUser = users.findOne(testFriend.getId());
+		assertNull(retrievedFriend);
 	}
 
 //	@Test

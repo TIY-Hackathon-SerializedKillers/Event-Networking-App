@@ -23,7 +23,7 @@ public class Friend extends User {
 
     public Friend(User user) {
         this.user = user;
-//        this.friend = this;
+        this.friend = this;
     }
 
     //Getters and setters
