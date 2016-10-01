@@ -141,15 +141,37 @@ public class NetworkingJSONController {
 
         //add userJoiningEvent to eventBeingJoined's list of attendees
         //it says attendees is null??
-        eventBeingJoined.addToAttendees(userJoiningEvent);
-        System.out.println("Added user " + userJoiningEvent.getFirstName() + " " + userJoiningEvent.getLastName() + " to event " + eventBeingJoined.getName());
+//        eventBeingJoined.addToAttendees(userJoiningEvent);
+        //Instead, try finding all attendees by userEvents table
+        ArrayList<User> thisEventsAttendees = new ArrayList<>();
+        //If it doesn't work, might need to pass in the event instead of the event id.
+        Iterable<UserEvent> allUserEventsLinkedToThisEvent = userEvents.findAllByEventId(idContainer.getEventId());
+        for (UserEvent currentUserEvent : allUserEventsLinkedToThisEvent) {
+            thisEventsAttendees.add(currentUserEvent.getUser());
+        }
+
+        System.out.println("Adding user " + userJoiningEvent.getFirstName() + " " + userJoiningEvent.getLastName() + " to event " + eventBeingJoined.getName());
 
         //resave eventBeingJoined with updated list of attendees
-        events.save(eventBeingJoined);
+        //now won't need to do this bc just linking with userEvents table instead of array list in event class
+//        events.save(eventBeingJoined);
 
         //return the event's list of attendees
-        return eventBeingJoined.getAttendees();
+//        return eventBeingJoined.getAttendees();
+        return thisEventsAttendees;
     }
+
+    //Just for local testing purposes
+    @RequestMapping(path = "/seeUserEvents.json", method = RequestMethod.GET)
+    public ArrayList<UserEvent> seeUserEvents() {
+        ArrayList<UserEvent> listOfUserEvents = new ArrayList<>();
+        Iterable<UserEvent> allUserEvents = userEvents.findAll();
+        for (UserEvent currentUserEvent : allUserEvents) {
+            listOfUserEvents.add(currentUserEvent);
+        }
+        return listOfUserEvents;
+    }
+
 
 //    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
 //    public List<Friend> requestContact(/*userId, friendId*/) {
