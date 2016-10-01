@@ -5,7 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,6 +24,8 @@ public class EventNetworkingAppApplicationTests {
 
 	@Autowired
 	UserEventRepository userEvents;
+
+	NetworkingJSONController testJSONController = new NetworkingJSONController();
 
 	@Test
 	public void contextLoads() {
@@ -50,6 +54,35 @@ public class EventNetworkingAppApplicationTests {
 		assertNull(retrievedUser);
 
 	}
+
+//	@Test
+//	public void testConnectUser(){
+//
+//		System.out.println("Testing inserting user into db");
+//
+//		String testEmail = "test::email";
+//		String testPassword = "test::password";
+//		String testFirstName = "test::firstName";
+//		String testLastName = "test::lastName";
+//		String testTechSkills = "test::techSkills";
+//
+//		User testUser = new User(testEmail, testPassword, testFirstName, testLastName, testTechSkills);
+//		users.save(testUser);
+//
+//		System.out.println("User added: " + testUser);
+//
+//		testJSONController.requestContact(
+//
+//
+//
+//
+////		Delete User
+//		User retrievedUser = users.findOne(testUser.getId());
+//		users.delete(testUser);
+//		retrievedUser = users.findOne(testUser.getId());
+//		assertNull(retrievedUser);
+//
+//	}
 
 //	@Test
 //	public void testRegisterUser() {
