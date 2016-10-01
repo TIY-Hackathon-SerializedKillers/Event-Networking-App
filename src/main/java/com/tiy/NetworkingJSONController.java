@@ -88,6 +88,8 @@ public class NetworkingJSONController {
         Iterable<Event> listOfEvents = events.findAll();
         ArrayList<Event> allEvents = new ArrayList<Event>();
         for (Event event : listOfEvents) {
+            //set the event's list of attendees before adding
+            event.setAttendees(setListOfAttendees(event));
             allEvents.add(event);
         }
         return allEvents;
@@ -120,11 +122,17 @@ public class NetworkingJSONController {
 //        return event;
     }
 
-    public void setListOfAttendees(Event event) {
+    public ArrayList<User> setListOfAttendees(Event event) {
         //I need to query the userevents for ones that have this eventid
         Iterable<UserEvent> allUserEventsForThisEvent = userEvents.findAllByEventId(event.getId());
-
-
+        ArrayList<User> allAttendees = new ArrayList<>();
+        for (UserEvent currentUserEvent : allUserEventsForThisEvent) {
+            //get the user for currentUserEvent
+            User currentUser = users.findOne(currentUserEvent.getUser().getId());
+            //add them to the list of people attending the event
+            allAttendees.add(currentUser);
+        }
+        return allAttendees;
     }
 
     // What we need from Dan: Just int eventId
