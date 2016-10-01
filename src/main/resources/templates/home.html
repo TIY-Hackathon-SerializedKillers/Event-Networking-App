@@ -32,5 +32,20 @@ Password: <input type="text" ng-model="loginPassword"/> <br/>
 
 {{loginContainerForLogin}}
 
+
+<br/><br/><br/><br/><br/><br/><br/>
+Add an event:<br/>
+Event name: <input type="text" ng-model="newEventName"/> <br/>
+Location: <input type="text" ng-model="newEventLocation"/> <br/>
+Date: <input type="text" ng-model="newEventDate"/> <br/>
+Time: <input type="text" ng-model="newEventTime"/> <br/>
+<input type="button" ng-click="createNewEvent(newEventName, newEventLocation, newEventDate, newEventTime)" value="Create"/> <br/>
+
+<br/>
+All Events: <br/>
+<span ng-repeat="currentEvent in allEvents">
+    {{currentEvent}}
+</span>
+
 </body>
 </html>

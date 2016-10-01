@@ -45,6 +45,29 @@ angular.module('NetworkingAngularApp', [])
                     });
         };
 
+        $scope.createNewEvent = function(newEventName, newEventLocation, newEventDate, newEventTime) {
+             console.log("In createNewEvent function in ng controller");
+
+             //Make a container
+             var newEvent = {
+                 name: newEventName,
+                 location: newEventLocation,
+                 date: newEventDate,
+                 time: newEventTime
+             }
+
+             $http.post("/addEvent.json", newEvent)
+                 .then(
+                     function successCallback(response) {
+                         console.log(response.data);
+                         console.log("Adding data to scope");
+                         $scope.allEvents = response.data;
+                     },
+                     function errorCallback(response) {
+                         console.log("Unable to get data...");
+                     });
+         };
+
 
 
 
