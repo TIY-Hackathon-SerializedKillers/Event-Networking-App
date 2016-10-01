@@ -102,8 +102,8 @@ public class NetworkingJSONController {
 
         List<Event> eventList = new ArrayList<Event>();
         Iterable<Event> allEvents = events.findAll();
-        for (Event event : allEvents) {
-            eventList.add(event);
+        for (Event currentEvent : allEvents) {
+            eventList.add(currentEvent);
         }
         return eventList;
 
@@ -129,15 +129,24 @@ public class NetworkingJSONController {
 
     // What we need from Dan: container holding int userId and int eventId
     @RequestMapping(path = "/joinEvent.json", method = RequestMethod.POST)
-    public List<User> joinEvent(@RequestBody UserEvent userEvent) {
+    public ArrayList<User> joinEvent(@RequestBody UserEvent userEvent) {
         userEvents.save(userEvent);
-        //use userId to go get userJoiningEvent
-        //use eventId to go get eventBeingJoined
-        //add userJoiningEvent to eventBeingJoined's list of attendees
-        //resave eventBeingJoined with updated list of attendees
-        //return the event's list of attendees
 
-//        return event.listOfAttendees;
+        //use userId to go get userJoiningEvent
+        User userJoiningEvent = users.findOne(userEvent.getUser().getId());
+
+        //use eventId to go get eventBeingJoined
+        Event eventBeingJoined = events.findOne(userEvent.getEvent().getId());
+
+        //add userJoiningEvent to eventBeingJoined's list of attendees
+        eventBeingJoined.addToAttendees(userJoiningEvent);
+        System.out.println("Added user " + userJoiningEvent.getFirstName() + " " + userJoiningEvent.getLastName() + " to event " + eventBeingJoined.getName());
+
+        //resave eventBeingJoined with updated list of attendees
+        events.save(eventBeingJoined);
+
+        //return the event's list of attendees
+        return eventBeingJoined.getAttendees();
     }
 
 //    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
