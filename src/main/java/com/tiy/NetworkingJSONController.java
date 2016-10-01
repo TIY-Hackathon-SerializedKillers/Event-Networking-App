@@ -76,6 +76,7 @@ public class NetworkingJSONController {
                 } else {
                     myLoginContainer.setErrorMessage(null);
                     myLoginContainer.setUser(thisUser);
+                    System.out.println("New login from: " + thisUser.getFirstName() + " " + thisUser.getLastName());
                 }
             }
         }
@@ -215,6 +216,39 @@ public class NetworkingJSONController {
             }
             return listOfMyFriends;
         }
+    }
+
+    //New idea: Make a viewUserInfo method that checks if the currentuser is on the friends list of the person they want to see the
+    //info of. If currentuser on list, return contact info of friend (return the friend's whole user object).
+    // If currentuser not on list, return error message.
+    //On Dan's side, he will display the email if he gets the user back, and display the button to request contact info if
+    //he gets the error message back.
+    // What we need from Dan: container holding int userId (current user, requester), int friendId (person currentUser wants to email, requestee)
+    @RequestMapping(path = "/viewUserInfo.json", method = RequestMethod.POST)
+    public LoginContainer viewUserInfo(@RequestBody FriendConnectionContainer friendConnectionContainer) {
+        //go through friends table and find
+        // current user is seeing if they are on friend list of friend
+        User requesterUser = users.findOne(friendConnectionContainer.userId);
+        User requesteeFriend = users.findOne(friendConnectionContainer.friendId);
+   
+        LoginContainer myContainer = new LoginContainer();
+        boolean noAccess = true;
+
+        Iterable<Friend> requesteesFriendList = friends.findAllByUserId(friendConnectionContainer.friendId);
+        for (Friend friend : requesteesFriendList) {
+            if (friendConnectionContainer.userId == friend.getId()) {
+                myContainer.user = users.findOne(friendConnectionContainer.friendId);
+                myContainer.errorMessage = null;
+                noAccess = false;
+            }
+        }
+
+        if (noAccess) {
+            myContainer.user = null;
+            myContainer.errorMessage = "You do not have permission to view this person's contact info.";
+        }
+
+        return myContainer;
     }
 
 //    @RequestMapping(path = "/viewFriends.json", method = RequestMethod.GET)
