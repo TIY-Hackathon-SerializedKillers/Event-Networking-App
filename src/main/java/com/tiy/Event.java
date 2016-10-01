@@ -27,11 +27,13 @@ public class Event {
 
     @Column
     ArrayList<User> attendees = new ArrayList<>();
+//    ArrayList<User> attendees;
 
 //    @ManyToOne
 //    UserEvent userEvent;
 
     public Event() {
+//        this.attendees = new ArrayList<>();
     }
 
     public Event(String name, String location, String date, String time) {
@@ -39,6 +41,7 @@ public class Event {
         this.location = location;
         this.date = date;
         this.time = time;
+//        this.attendees = new ArrayList<>();
     }
 
     public void addToAttendees(User user) {

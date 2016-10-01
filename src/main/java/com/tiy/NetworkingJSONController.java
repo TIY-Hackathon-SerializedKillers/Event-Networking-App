@@ -140,6 +140,7 @@ public class NetworkingJSONController {
         userEvents.save(userEvent);
 
         //add userJoiningEvent to eventBeingJoined's list of attendees
+        //it says attendees is null??
         eventBeingJoined.addToAttendees(userJoiningEvent);
         System.out.println("Added user " + userJoiningEvent.getFirstName() + " " + userJoiningEvent.getLastName() + " to event " + eventBeingJoined.getName());
 
