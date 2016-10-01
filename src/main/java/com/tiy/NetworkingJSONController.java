@@ -92,28 +92,30 @@ public class NetworkingJSONController {
         return allEvents;
     }
 
+// This is where we stopped on Friday evening.
 
-//    @RequestMapping(path = "/addEvent.json", method = RequestMethod.POST)
-//    public List<Event> addEvent(@RequestBody Event event/*name, location, date, user*/) throws Exception{
+    @RequestMapping(path = "/addEvent.json", method = RequestMethod.POST)
+    public List<Event> addEvent(@RequestBody Event event/*name, location, date, user*/) throws Exception{
+        events.save(event);
+
+        List<Event> eventList = new ArrayList<Event>();
+        Iterable<Event> allEvents = events.findAll();
+        for (Event event : allEvents) {
+            eventList.add(event);
+        }
+        return eventList;
+
+//        User user = (User)session.getAttribute("user");
 //
-//        List<Event> eventList = new ArrayList<Event>();
-//        Iterable<Event> allEvents = events.findAll();
-//        for (Event event : allEvents) {
-//            eventList.add(event);
+//        if (user == null) {
+//            throw new Exception("Unable to add event.");
 //        }
-//        return eventList;
+//        event.userEvent = user;
 //
-////        User user = (User)session.getAttribute("user");
-////
-////        if (user == null) {
-////            throw new Exception("Unable to add event.");
-////        }
-////        event.userEvent = user;
-////
-////        events.save(event);
-////
-////        return event;
-//    }
+//        events.save(event);
+//
+//        return event;
+    }
 
 //    @RequestMapping(path = "/getSingleEvent.json", method = RequestMethod.POST)
 //    public Event singleEventView(/*eventID*/) {
