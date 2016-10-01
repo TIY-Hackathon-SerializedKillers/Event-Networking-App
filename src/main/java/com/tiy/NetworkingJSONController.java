@@ -117,16 +117,18 @@ public class NetworkingJSONController {
 //        return event;
     }
 
-//    @RequestMapping(path = "/getSingleEvent.json", method = RequestMethod.POST)
-//    public Event singleEventView(/*eventID*/) {
-//        return event;
-//    }
+    @RequestMapping(path = "/getSingleEvent.json", method = RequestMethod.POST)
+    public Event singleEventView(@RequestBody int eventID) {
+        Event event = events.findOne(eventID);
+        System.out.println("Now returning event " + event.getName());
+        return event;
+    }
 
-//    @RequestMapping(path = "/joinEvent.json", method = RequestMethod.POST)
-//    public List<User> joinEvent(/*userId, eventId*/) {
-//        return event.listOfAttendees;
-//    }
-//
+    @RequestMapping(path = "/joinEvent.json", method = RequestMethod.POST)
+    public List<User> joinEvent(/*userId, eventId*/) {
+        return event.listOfAttendees;
+    }
+
 //    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
 //    public List<Friend> requestContact(/*userId, friendId*/) {
 //        return user.listOfFriends;
