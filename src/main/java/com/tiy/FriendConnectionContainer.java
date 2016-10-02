@@ -25,11 +25,11 @@ public class FriendConnectionContainer {
         this.userId = userId;
     }
 
-    public int getFriendId() {
+    public int getUserWhoWantsToBeFriendId() {
         return userWhoWantsToBeFriendId;
     }
 
-    public void setFriendId(int userWhoWantsToBeFriendId) {
+    public void setUserWhoWantsToBeFriendId(int userWhoWantsToBeFriendId) {
         this.userWhoWantsToBeFriendId = userWhoWantsToBeFriendId;
     }
 }
