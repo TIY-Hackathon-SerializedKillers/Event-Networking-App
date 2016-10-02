@@ -91,29 +91,52 @@ angular.module('NetworkingAngularApp', [])
                      });
         };
 
-        $scope.viewUserInfo = function(requesterUserId, requesteeUserId) {
-             console.log("In viewUserInfo function in ng controller");
+//        $scope.viewUserInfo = function(requesterUserId, requesteeUserId) {
+//             console.log("In viewUserInfo function in ng controller");
+//
+//             //Make a container
+//             var idContainer = {
+//                  userId: requesterUserId,
+//                  friendId: requesteeUserId
+//             }
+//
+//             $http.post("/viewUserInfo.json", idContainer)
+//                  .then(
+//                     function successCallback(response) {
+//                         console.log(response.data);
+//                         console.log("Adding data to scope");
+//                         // Returns container with error or user
+//                         $scope.friendContainer = response.data;
+//                     },
+//                     function errorCallback(response) {
+//                         console.log("Unable to get data...");
+//                     });
+//        };
 
-             //Make a container
-             var idContainer = {
-                  userId: requesterUserId,
-                  friendId: requesteeUserId
-             }
+        $scope.addToMyFriendList = function (myUserIdAllow, friendUserIdAllow) {
+                     console.log("In addToMyFriendList function in ng controller");
 
-             $http.post("/viewUserInfo.json", idContainer)
-                  .then(
-                     function successCallback(response) {
-                         console.log(response.data);
-                         console.log("Adding data to scope");
-                         // Returns container with error or user
-                         $scope.friendContainer = response.data;
-                     },
-                     function errorCallback(response) {
-                         console.log("Unable to get data...");
-                     });
-        };
+                     //Make a container
+                     var idFriendContainer = {
+                          userId: myUserIdAllow,
+                          userWhoWantsToBeFriendId: friendUserIdAllow
+                     }
+
+                     $http.post("//addToMyFriendList.json", idFriendContainer)
+                          .then(
+                             function successCallback(response) {
+                                 console.log(response.data);
+                                 console.log("Adding data to scope");
+                                 // Returns container with error or user
+                                 $scope.addToMyFriendListMessage = response.data;
+                             },
+                             function errorCallback(response) {
+                                 console.log("Unable to get data...");
+                             });
+                };
 
 
-    console.log("Page loaded!");
+
+        console.log("Page loaded!");
 
     });

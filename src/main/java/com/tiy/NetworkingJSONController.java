@@ -200,14 +200,14 @@ public class NetworkingJSONController {
 //        User user = friends.findOne(friendConnectionContainer.getUserId());
 
         //Find FRIEND in users based on userID -- just to make sure valid
-        User friend = users.findOne(friendConnectionContainer.getFriendId());
+        User friend = users.findOne(friendConnectionContainer.getUserWhoWantsToBeFriendId());
         if (user == null) {
             throw new Exception("Requested user is not in database");
         } else if (friend == null) {
             throw new Exception("Requested friend is not in database");
         } else {
             //Make a new Friend object with userId from db and friendId from db
-            Friend myFriend = new Friend(user);
+            Friend myFriend = new Friend(user, friendConnectionContainer.getUserWhoWantsToBeFriendId());
             //save to friends table
             friends.save(myFriend);
             //return the user's list of friends by querying table
@@ -231,15 +231,15 @@ public class NetworkingJSONController {
         //go through friends table and find
         // current user is seeing if they are on friend list of friend
         User requesterUser = users.findOne(friendConnectionContainer.userId);
-        User requesteeFriend = users.findOne(friendConnectionContainer.friendId);
+        User requesteeFriend = users.findOne(friendConnectionContainer.userWhoWantsToBeFriendId);
 
         LoginContainer myContainer = new LoginContainer();
         boolean noAccess = true;
 
-        Iterable<Friend> requesteesFriendList = friends.findAllByUserId(friendConnectionContainer.friendId);
+        Iterable<Friend> requesteesFriendList = friends.findAllByUserId(friendConnectionContainer.userWhoWantsToBeFriendId);
         for (Friend friend : requesteesFriendList) {
             if (friendConnectionContainer.userId == friend.getId()) {
-                myContainer.user = users.findOne(friendConnectionContainer.friendId);
+                myContainer.user = users.findOne(friendConnectionContainer.userWhoWantsToBeFriendId);
                 myContainer.errorMessage = null;
                 noAccess = false;
             }

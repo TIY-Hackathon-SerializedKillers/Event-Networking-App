@@ -44,7 +44,7 @@ Time: <input type="text" ng-model="newEventTime"/> <br/>
 <br/>
 All Events: <br/>
 <span ng-repeat="currentEvent in allEvents">
-    {{currentEvent}}
+    {{currentEvent}} <br/>
 </span>
 
 <br/><br/><br/><br/><br/>
@@ -56,18 +56,24 @@ Event id: <input type="number" ng-model="eventIWantToJoinId"/>
 <br/>
 Updated attendees at this event: <br/>
 <span ng-repeat="currentAttendee in eventAttendees">
-    {{currentAttendee}}
+    {{currentAttendee}} <br/>
 </span>
 
 
 
-<br/><br/><br/><br/><br/>
-Request to see another attendee's info:
-Your userId: <input type="number" ng-model="requesterUserId"/> <br/>
-Their userId: <input type="number" ng-model="requesteeUserId"/> <br/>
-<input type="button" ng-click="viewUserInfo(requesterUserId, requesteeUserId)" value="Go"/> <br/>
-Response: {{friendContainer}} <br/><br/>
+<!--<br/><br/><br/><br/><br/>-->
+<!--Request to see another attendee's info:-->
+<!--Your userId: <input type="number" ng-model="requesterUserId"/> <br/>-->
+<!--Their userId: <input type="number" ng-model="requesteeUserId"/> <br/>-->
+<!--<input type="button" ng-click="viewUserInfo(requesterUserId, requesteeUserId)" value="Go"/> <br/>-->
+<!--Response: {{friendContainer}} <br/><br/>-->
 
+<br/><br/><br/><br/><br/>
+Add this person to my friend list so that they can see my email: <br/>
+My user ID: <input type="number" ng-model="myUserIdAllow"/> <br/>
+Person who is requesting to be my friend's ID: <input type="number" ng-model="friendUserIdAllow"/> <br/>
+<input type="button" ng-click="addToMyFriendList(myUserIdAllow, friendUserIdAllow)" value="Join"/> <br/>
+Response: {{addToMyFriendListMessage}} <br/><br/>
 
 </body>
 </html>
