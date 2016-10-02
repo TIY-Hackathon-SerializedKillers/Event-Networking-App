@@ -11,7 +11,7 @@ angular.module('NetworkingAngularApp', [])
                 password: password,
                 techSkills: techSkills
             }
-            console.log("Container we're about to send: " + newUser);
+            console.log("Container we're about to send: " + newUser.email + " " + newUser.firstName + " " + newUser.lastName + " " + newUser.password + " " + newUser.techSkills);
 
             $http.post("/register.json", newUser)
                 .then(
