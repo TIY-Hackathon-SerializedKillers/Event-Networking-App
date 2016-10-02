@@ -84,7 +84,7 @@ public class EventNetworkingAppApplicationTests {
 
 		System.out.println("User added: " + testFriend);
 
-		friendConnectionContainer.setFriendId(testFriend.getId());
+		friendConnectionContainer.setUserWhoWantsToBeFriendId(testFriend.getId());
 		friendConnectionContainer.setUserId(testUser.getId());
 
 		try {
@@ -189,12 +189,12 @@ public class EventNetworkingAppApplicationTests {
 //		userEvents.deleteAll();
 //	}
 
- 	@Test
-	public void testInsertANewUserTestFriendForTestDonald() {
- 		User testUser = users.findOne(20);
-		Friend testFriend = new Friend(testUser);
-		friends.save(testFriend);
-	}
+// 	@Test
+//	public void testInsertANewUserTestFriendForTestDonald() {
+// 		User testUser = users.findOne(20);
+//		Friend testFriend = new Friend(testUser);
+//		friends.save(testFriend);
+//	}
 
 //	@Test
 //	public void deleteFriendPerson() {

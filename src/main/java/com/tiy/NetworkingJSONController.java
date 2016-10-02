@@ -294,13 +294,20 @@ public class NetworkingJSONController {
     //It will just give Dan back a message that says successful or not.
     //What we need from Dan: container holding int userId, int userWhoWantsToBeFriendId
     @RequestMapping(path = "/addToMyFriendList.json")
-    public String addToMyFriendList(@RequestBody FriendConnectionContainer friendConnectionContainer) {
+    public User addToMyFriendList(@RequestBody FriendConnectionContainer friendConnectionContainer) {
         int userId = friendConnectionContainer.getUserId();
         int userWhoWantsToBeFriendId = friendConnectionContainer.getUserWhoWantsToBeFriendId();
 
-        Friend newFriend = new Friend(users.findOne(userId), userWhoWantsToBeFriendId);
+        User friendUser = users.findOne(userWhoWantsToBeFriendId);
+        Friend newFriend;
 
-        return "User added to your friend list!";
+        if (friendUser != null) {
+            newFriend = new Friend(users.findOne(userId), userWhoWantsToBeFriendId);
+            System.out.println("User added to your friend list: " + friendUser.getFirstName());
+            System.out.println("New friend in database with id: " newFriend.getId());
+        }
+
+        return friendUser;
     }
 
 
