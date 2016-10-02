@@ -84,8 +84,8 @@ public class NetworkingJSONController {
     }
 
     // What we need from Dan: nothing!
-    @RequestMapping(path = "/getAllEvents.json", method = RequestMethod.GET)
-    public ArrayList<Event> getAllEvents() {
+    @RequestMapping(path = "/showAllEvents.json", method = RequestMethod.GET)
+    public ArrayList<Event> showAllEvents() {
         Iterable<Event> listOfEvents = events.findAll();
         ArrayList<Event> allEvents = new ArrayList<Event>();
         for (Event event : listOfEvents) {
@@ -96,7 +96,17 @@ public class NetworkingJSONController {
         return allEvents;
     }
 
-// This is where we stopped on Friday evening.
+    @RequestMapping(path = "/getAllEvents.json", method = RequestMethod.POST)
+    public ArrayList<Event> getAllEvents() {
+        Iterable<Event> listOfEvents = events.findAll();
+        ArrayList<Event> allEvents = new ArrayList<Event>();
+        for (Event event : listOfEvents) {
+            //set the event's list of attendees before adding
+            event.setAttendees(setListOfAttendees(event));
+            allEvents.add(event);
+        }
+        return allEvents;
+    }
 
     // What we need from Dan: container holding event info: String name, String location, String date, String time (will have an empty list of attendees when first created)
     @RequestMapping(path = "/addEvent.json", method = RequestMethod.POST)
@@ -288,6 +298,18 @@ public class NetworkingJSONController {
 
         return friendUser;
     }
+
+    @RequestMapping(path = "/returnFriends.json", method = RequestMethod.POST)
+    public ArrayList<Friend> returnFriends() {
+        Iterable<Friend> listOfFriends = friends.findAll();
+        ArrayList<Friend> allFriends = new ArrayList<>();
+        for (Friend friend : listOfFriends) {
+            allFriends.add(friend);
+        }
+        return allFriends;
+    }
+
+
 
 
 
