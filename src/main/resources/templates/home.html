@@ -58,5 +58,16 @@ Updated attendees at this event: <br/>
 <span ng-repeat="currentAttendee in eventAttendees">
     {{currentAttendee}}
 </span>
+
+
+
+<br/><br/><br/><br/><br/>
+Request to see another attendee's info:
+Your userId: <input type="number" ng-model="requesterUserId"/> <br/>
+Their userId: <input type="number" ng-model="requesteeUserId"/> <br/>
+<input type="button" ng-click="viewUserInfo(requesterUserId, requesteeUserId)" value="Go"/> <br/>
+Response: {{friendContainer}} <br/><br/>
+
+
 </body>
 </html>
