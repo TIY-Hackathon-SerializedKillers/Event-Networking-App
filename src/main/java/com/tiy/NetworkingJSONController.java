@@ -27,6 +27,9 @@ public class NetworkingJSONController {
     @Autowired
     EventRepository events;
 
+    @Autowired
+    NotificationConnectionRepository notificationConnections;
+
     // What we need from Dan: container holding user info: String email, String password, String firstName, String lastName, String techSkills
     @RequestMapping(path = "/register.json", method = RequestMethod.POST)
     //Problem -> can't call @RequestBody on multiple things! Just a single java object.
@@ -277,6 +280,33 @@ public class NetworkingJSONController {
         return allFriends;
     }
 
+    // When the user can't see the other person's contact info and button pops up to request contact, button will
+    // send them here.
+    // This will return a RequestContactContainer item that gives the user who the notification needs to go to
+    // and an updated arrayList of users who would like that person's contact info.
+    // What we need from Dan: FriendConnectionContainer with int userId and int userWhoWantsToBeFriendId
+    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
+    public RequestContactContainer requestContact(@RequestBody FriendConnectionContainer friendConnectionContainer) {
+        int userId = friendConnectionContainer.getUserId();
+        int userWhoWantsToBeFriendId = friendConnectionContainer.getUserWhoWantsToBeFriendId();
+
+        User userWhoGetsNotification = users.findOne(userId);
+        NotificationConnection notificationConnection = new NotificationConnection(userWhoGetsNotification, userWhoWantsToBeFriendId);
+        notificationConnections.save(notificationConnection);
+
+        ArrayList<User> usersWhoWantYourContactInfo = new ArrayList<>();
+        Iterable<NotificationConnection> allNotificationConnectionsForUser = notificationConnections.findAllByUserId(userId);
+        for (NotificationConnection currentConnection : allNotificationConnectionsForUser) {
+            int currentFriendId = currentConnection.getFriendId();
+            User currentFriendUser = users.findOne(currentFriendId);
+            usersWhoWantYourContactInfo.add(currentFriendUser);
+        }
+
+        RequestContactContainer myReturnContainer = new RequestContactContainer(userWhoGetsNotification, usersWhoWantYourContactInfo);
+
+        return myReturnContainer;
+    }
+
     //When user gets a notification, and wants to give the other person their email, go to this endpoint.
     //It will add the other person to their list of friends.
     //It will just give Dan back a message that says successful or not.
@@ -294,10 +324,26 @@ public class NetworkingJSONController {
             friends.save(newFriend);
             System.out.println("User added to your friend list: " + friendUser.getFirstName());
             System.out.println("New friend in database with id: " + newFriend.getId());
+
+            //delete from notificationconnection table since connection has been made
+            NotificationConnection thisNotificationConnection = notificationConnections.findByUserIdAndFriendId(userId, userWhoWantsToBeFriendId);
+            notificationConnections.delete(thisNotificationConnection.getId());
         }
 
         return friendUser;
     }
+
+    // Just for us to see what's in notification connection table
+    @RequestMapping(path = "/viewNotificationConnections.json", method = RequestMethod.GET)
+    public ArrayList<NotificationConnection> viewNotificationConnections() {
+        Iterable<NotificationConnection> listOfNotificationConnections = notificationConnections.findAll();
+        ArrayList<NotificationConnection> allNotificationConnections = new ArrayList<>();
+        for (NotificationConnection currentNotificationConnection : listOfNotificationConnections) {
+            allNotificationConnections.add(currentNotificationConnection);
+        }
+        return allNotificationConnections;
+    }
+
 
     @RequestMapping(path = "/returnFriends.json", method = RequestMethod.POST)
     public ArrayList<Friend> returnFriends() {

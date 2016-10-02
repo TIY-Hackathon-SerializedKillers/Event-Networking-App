@@ -1,6 +1,7 @@
 package com.tiy;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 /**
  * Created by jessicatracy on 9/29/16.
@@ -26,6 +27,9 @@ public class User {
 
     @Column
     String techSkills;
+
+//    @Column
+//    ArrayList<User> usersWhoIHaveNotificationsFrom = new ArrayList<>();
 
 //    @ManyToOne
 //    UserEvent userEvent;
@@ -94,4 +98,12 @@ public class User {
     public void setTechSkills(String techSkills) {
         this.techSkills = techSkills;
     }
+
+//    public ArrayList<User> getUsersWhoIHaveNotificationsFrom() {
+//        return usersWhoIHaveNotificationsFrom;
+//    }
+//
+//    public void setUsersWhoIHaveNotificationsFrom(ArrayList<User> usersWhoIHaveNotificationsFrom) {
+//        this.usersWhoIHaveNotificationsFrom = usersWhoIHaveNotificationsFrom;
+//    }
 }

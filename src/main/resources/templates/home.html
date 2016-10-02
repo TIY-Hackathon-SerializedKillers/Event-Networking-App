@@ -85,5 +85,15 @@ If yes, should get a their user object back.
 If no, should get error message. <br/>
 {{doIHaveAccessResponse}} <br/><br/>
 
+
+<br/><br/><br/><br/><br/>
+Test -- Request contact info from someone! This means I should be added to their list of notification connections. <br/>
+My user ID: <input type="number" ng-model="myUserIdRequestContact"/> <br/>
+Their user ID: <input type="number" ng-model="theirUserIdRequestContact"/> <br/>
+<input type="button" ng-click="requestContact(myUserIdRequestContact, theirUserIdRequestContact)" value="Request"/> <br/>
+User who gets notification: {{requestContactResponse.userGettingNotification}}
+List of users who want to contact this user: {{requestContactResponse.usersRequestingContact}} <br/><br/>
+
+
 </body>
 </html>

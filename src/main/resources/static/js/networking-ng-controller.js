@@ -157,6 +157,26 @@ angular.module('NetworkingAngularApp', [])
                      });
         };
 
+        $scope.requestContact = function(myUserIdRequestContact, theirUserIdRequestContact) {
+             console.log("In requestContact function in ng controller");
+
+             //Make a container
+             var requestContactContainer = {
+                  userId: theirUserIdRequestContact,
+                  userWhoWantsToBeFriendId: myUserIdRequestContact
+             }
+
+             $http.post("/requestContact.json", requestContactContainer)
+                  .then(
+                     function successCallback(response) {
+                         console.log(response.data);
+                         console.log("Adding data to scope");
+                         $scope.requestContactResponse = response.data;
+                     },
+                     function errorCallback(response) {
+                         console.log("Unable to get data...");
+                     });
+        };
 
         console.log("Page loaded!");
 
