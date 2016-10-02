@@ -15,8 +15,11 @@ public class Friend{
     @ManyToOne
     User user;
 
-    @ManyToOne
-    User friend;
+//    @ManyToOne
+//    User friend;
+
+    @Column(nullable = false)
+    int friendId;
 
     public Friend() {
     }
@@ -43,11 +46,19 @@ public class Friend{
         this.user = user;
     }
 
-    public User getFriend() {
-        return friend;
+//    public User getFriend() {
+//        return friend;
+//    }
+//
+//    public void setFriend(User friend) {
+//        this.friend = friend;
+//    }
+
+    public int getFriendId() {
+        return friendId;
     }
 
-    public void setFriend(User friend) {
-        this.friend = friend;
+    public void setFriendId(int friendId) {
+        this.friendId = friendId;
     }
 }
