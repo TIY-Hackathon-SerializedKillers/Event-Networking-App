@@ -135,6 +135,27 @@ angular.module('NetworkingAngularApp', [])
                      });
         };
 
+        $scope.checkIfIHaveAccess = function(myUserIdCheck, theirUserIdCheck) {
+             console.log("In checkIfIHaveAccess function in ng controller");
+
+             //Make a container
+             var  = {
+                  userId: myUserIdAllow,
+                  userWhoWantsToBeFriendId: friendUserIdAllow
+             }
+
+             $http.post("/addToMyFriendList.json", idFriendContainer)
+                  .then(
+                     function successCallback(response) {
+                         console.log(response.data);
+                         console.log("Adding data to scope");
+                         // Returns container with error or user
+                         $scope.addToMyFriendListUser = response.data;
+                     },
+                     function errorCallback(response) {
+                         console.log("Unable to get data...");
+                     });
+        };
 
 
         console.log("Page loaded!");
