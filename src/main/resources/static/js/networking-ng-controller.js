@@ -139,18 +139,18 @@ angular.module('NetworkingAngularApp', [])
              console.log("In checkIfIHaveAccess function in ng controller");
 
              //Make a container
-             var  = {
-                  userId: myUserIdAllow,
-                  userWhoWantsToBeFriendId: friendUserIdAllow
+             var doIHaveAccessContainer = {
+                  userId: theirUserIdCheck,
+                  userWhoWantsToBeFriendId: myUserIdCheck
              }
 
-             $http.post("/addToMyFriendList.json", idFriendContainer)
+             $http.post("/viewUserInfo.json", doIHaveAccessContainer)
                   .then(
                      function successCallback(response) {
                          console.log(response.data);
                          console.log("Adding data to scope");
                          // Returns container with error or user
-                         $scope.addToMyFriendListUser = response.data;
+                         $scope.doIHaveAccessResponse = response.data;
                      },
                      function errorCallback(response) {
                          console.log("Unable to get data...");
