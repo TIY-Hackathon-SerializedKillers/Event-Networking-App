@@ -75,5 +75,15 @@ Person who is requesting to be my friend's ID: <input type="number" ng-model="fr
 <input type="button" ng-click="addToMyFriendList(myUserIdAllow, friendUserIdAllow)" value="Update"/> <br/>
 User who is now on my friend list: {{addToMyFriendListUser.firstName}} {{addToMyFriendListUser.lastName}} <br/><br/>
 
+
+<br/><br/><br/><br/><br/>
+Test -- Do I have access to this person's email?? <br/>
+My user ID: <input type="number" ng-model="myUserIdCheck"/> <br/>
+Their user ID: <input type="number" ng-model="theirUserIdCheck"/> <br/>
+<input type="button" ng-click="checkIfIHaveAccess(myUserIdCheck, theirUserIdCheck)" value="Check"/> <br/>
+If yes, should get a their user object back.
+If no, should get error message. <br/>
+{{doIHaveAccess}} <br/><br/>
+
 </body>
 </html>

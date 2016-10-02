@@ -114,26 +114,26 @@ angular.module('NetworkingAngularApp', [])
 //        };
 
         $scope.addToMyFriendList = function (myUserIdAllow, friendUserIdAllow) {
-                     console.log("In addToMyFriendList function in ng controller");
+             console.log("In addToMyFriendList function in ng controller");
 
-                     //Make a container
-                     var idFriendContainer = {
-                          userId: myUserIdAllow,
-                          userWhoWantsToBeFriendId: friendUserIdAllow
-                     }
+             //Make a container
+             var idFriendContainer = {
+                  userId: myUserIdAllow,
+                  userWhoWantsToBeFriendId: friendUserIdAllow
+             }
 
-                     $http.post("/addToMyFriendList.json", idFriendContainer)
-                          .then(
-                             function successCallback(response) {
-                                 console.log(response.data);
-                                 console.log("Adding data to scope");
-                                 // Returns container with error or user
-                                 $scope.addToMyFriendListUser = response.data;
-                             },
-                             function errorCallback(response) {
-                                 console.log("Unable to get data...");
-                             });
-                };
+             $http.post("/addToMyFriendList.json", idFriendContainer)
+                  .then(
+                     function successCallback(response) {
+                         console.log(response.data);
+                         console.log("Adding data to scope");
+                         // Returns container with error or user
+                         $scope.addToMyFriendListUser = response.data;
+                     },
+                     function errorCallback(response) {
+                         console.log("Unable to get data...");
+                     });
+        };
 
 
 
