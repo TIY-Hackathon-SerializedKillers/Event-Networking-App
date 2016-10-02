@@ -303,8 +303,9 @@ public class NetworkingJSONController {
 
         if (friendUser != null) {
             newFriend = new Friend(users.findOne(userId), userWhoWantsToBeFriendId);
+            friends.save(newFriend);
             System.out.println("User added to your friend list: " + friendUser.getFirstName());
-            System.out.println("New friend in database with id: " newFriend.getId());
+            System.out.println("New friend in database with id: " + newFriend.getId());
         }
 
         return friendUser;
