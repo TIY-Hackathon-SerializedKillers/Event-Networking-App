@@ -193,79 +193,21 @@ public class NetworkingJSONController {
     // PROBLEM: RIGHT NOW THIS IS NOT ASKING THE USER TO GRANT PERMISSION. WILL NEED 2 ENDPOINTS I THINK.
     // This one is just adding the friend connection in friend database and returning the user's friends, so
     // it's assuming that permission was already granted.
-    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
-    public ArrayList<Friend> requestContact(@RequestBody FriendConnectionContainer friendConnectionContainer) throws Exception {
-        //Find USER in users based on userID -- just to make sure valid
-        User user = users.findOne(friendConnectionContainer.getUserId());
-//        User user = friends.findOne(friendConnectionContainer.getUserId());
-
-        //Find FRIEND in users based on userID -- just to make sure valid
-        User friend = users.findOne(friendConnectionContainer.getUserWhoWantsToBeFriendId());
-        if (user == null) {
-            throw new Exception("Requested user is not in database");
-        } else if (friend == null) {
-            throw new Exception("Requested friend is not in database");
-        } else {
-            //Make a new Friend object with userId from db and friendId from db
-            Friend myFriend = new Friend(user, friendConnectionContainer.getUserWhoWantsToBeFriendId());
-            //save to friends table
-            friends.save(myFriend);
-            //return the user's list of friends by querying table
-            Iterable<Friend> allMyFriends = friends.findAllByUserId(user.getId());
-            ArrayList<Friend> listOfMyFriends = new ArrayList<>();
-            for (Friend currentFriend : allMyFriends) {
-                listOfMyFriends.add(currentFriend);
-            }
-            return listOfMyFriends;
-        }
-    }
-
-    //New idea: Make a viewUserInfo method that checks if the currentuser is on the friends list of the person they want to see the
-    //info of. If currentuser on list, return contact info of friend (return the friend's whole user object).
-    // If currentuser not on list, return error message.
-    //On Dan's side, he will display the email if he gets the user back, and display the button to request contact info if
-    //he gets the error message back.
-    // What we need from Dan: container holding int userId (current user, requester), int friendId (person currentUser wants to email, requestee)
-    @RequestMapping(path = "/viewUserInfo.json", method = RequestMethod.POST)
-    public LoginContainer viewUserInfo(@RequestBody FriendConnectionContainer friendConnectionContainer) {
-        //go through friends table and find
-        // current user is seeing if they are on friend list of friend
-        User requesterUser = users.findOne(friendConnectionContainer.userId);
-        User requesteeFriend = users.findOne(friendConnectionContainer.userWhoWantsToBeFriendId);
-
-        LoginContainer myContainer = new LoginContainer();
-        boolean noAccess = true;
-
-        Iterable<Friend> requesteesFriendList = friends.findAllByUserId(friendConnectionContainer.userWhoWantsToBeFriendId);
-        for (Friend friend : requesteesFriendList) {
-            if (friendConnectionContainer.userId == friend.getId()) {
-                myContainer.user = users.findOne(friendConnectionContainer.userWhoWantsToBeFriendId);
-                myContainer.errorMessage = null;
-                noAccess = false;
-            }
-        }
-
-        if (noAccess) {
-            myContainer.user = null;
-            myContainer.errorMessage = "You do not have permission to view this person's contact info.";
-        }
-
-        return myContainer;
-    }
-
-//    @RequestMapping(path = "/viewFriends.json", method = RequestMethod.GET)
-//    public ArrayList<Friend> viewFriends(@RequestBody FriendConnectionContainer friendConnectionContainer) throws Exception {
+//    @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
+//    public ArrayList<Friend> requestContact(@RequestBody FriendConnectionContainer friendConnectionContainer) throws Exception {
 //        //Find USER in users based on userID -- just to make sure valid
 //        User user = users.findOne(friendConnectionContainer.getUserId());
+////        User user = friends.findOne(friendConnectionContainer.getUserId());
+//
 //        //Find FRIEND in users based on userID -- just to make sure valid
-//        User friend = users.findOne(friendConnectionContainer.getFriendId());
+//        User friend = users.findOne(friendConnectionContainer.getUserWhoWantsToBeFriendId());
 //        if (user == null) {
 //            throw new Exception("Requested user is not in database");
 //        } else if (friend == null) {
 //            throw new Exception("Requested friend is not in database");
 //        } else {
 //            //Make a new Friend object with userId from db and friendId from db
-//            Friend myFriend = new Friend(user);
+//            Friend myFriend = new Friend(user, friendConnectionContainer.getUserWhoWantsToBeFriendId());
 //            //save to friends table
 //            friends.save(myFriend);
 //            //return the user's list of friends by querying table
@@ -277,6 +219,42 @@ public class NetworkingJSONController {
 //            return listOfMyFriends;
 //        }
 //    }
+
+
+
+    //This is the initial method where on Dan's side users will click on an attendee and see one of two things:
+    // if they are already on the person's friend list, they will see the person's email.
+    // if they are not on the person's friend list, a button will pop up to ask if they would like to request access.
+    // This is the method that checks if they are on the friend list or not.
+    // Returns an error message if not on friend list, returns the user's info if they are.
+    // what we need from Dan: container holding userId (one whose friend list we're checking) and friendId (one who wants to get the other person's email)
+    @RequestMapping(path = "/viewUserInfo.json", method = RequestMethod.POST)
+    public LoginContainer viewUserInfo(@RequestBody FriendConnectionContainer friendConnectionContainer) {
+        int userId = friendConnectionContainer.getUserId();
+        int userWhoWantsToBeFriendId = friendConnectionContainer.getUserWhoWantsToBeFriendId();
+
+        boolean onFriendList = false;
+        //check the user's friend list by going to friend table and querying by userId.
+        Iterable<Friend> allOfUsersFriends = friends.findAllByUserId(userId);
+        for (Friend friend : allOfUsersFriends) {
+            if (friend.friendId == userWhoWantsToBeFriendId) {
+                onFriendList = true;
+            }
+        }
+        LoginContainer loginContainer = new LoginContainer();
+        User userToReturn;
+        if (onFriendList) {
+            //return container with the ORIGINAL users contact info (not user who wants to be friend) and null error message
+            loginContainer.setErrorMessage(null);
+            userToReturn = users.findOne(userId);
+            loginContainer.setUser(userToReturn);
+        } else {
+            //return container with error message and null user
+            loginContainer.setErrorMessage("Cannot access this person's email because you are not on their friend list.");
+            loginContainer.setUser(null);
+        }
+        return loginContainer;
+    }
 
     // Just for us to see what's in friends table
     @RequestMapping(path = "/viewFriends.json", method = RequestMethod.GET)
