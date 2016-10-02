@@ -57,6 +57,29 @@ public class EventNetworkingAppApplicationTests {
 
 	}
 
+	@Test
+	public void testEventIntoDatabase() {
+		System.out.println("Testing inserting event into db");
+
+		String testName = "test::name";
+		String testLocation = "test::location";
+		String testDate = "test::date";
+		String testTime = "test::time";
+
+		Event testEvent = new Event(testName, testLocation, testDate, testTime);
+		events.save(testEvent);
+
+//		assertEquals(1, users.count());
+		Event retrievedEvent = events.findOne(testEvent.getId());
+		assertNotNull(retrievedEvent);
+
+		events.delete(testEvent);
+//		assertEquals(0, users.count());
+		retrievedEvent = events.findOne(testEvent.getId());
+		assertNull(retrievedEvent);
+
+	}
+
 //	@Test
 //	public void testConnectUser(){
 //
