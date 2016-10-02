@@ -297,6 +297,10 @@ public class NetworkingJSONController {
     public String addToMyFriendList(@RequestBody FriendConnectionContainer friendConnectionContainer) {
         int userId = friendConnectionContainer.getUserId();
         int userWhoWantsToBeFriendId = friendConnectionContainer.getUserWhoWantsToBeFriendId();
+
+        Friend newFriend = new Friend(users.findOne(userId), userWhoWantsToBeFriendId);
+
+        return "User added to your friend list!";
     }
 
 

@@ -24,9 +24,9 @@ public class Friend{
     public Friend() {
     }
 
-    public Friend(User user) {
+    public Friend(User user, int userWhoWantsToBeFriendId) {
         this.user = user;
-//        this.friend = this;
+        this.friendId = userWhoWantsToBeFriendId;
     }
 
     //Getters and setters
