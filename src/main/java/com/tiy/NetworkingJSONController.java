@@ -278,6 +278,17 @@ public class NetworkingJSONController {
 //        }
 //    }
 
+    // Just for us to see what's in friends table
+    @RequestMapping(path = "/viewFriends.json", method = RequestMethod.GET)
+    public ArrayList<Friend> viewFriends() {
+        Iterable<Friend> listOfFriends = friends.findAll();
+        ArrayList<Friend> allFriends = new ArrayList<>();
+        for (Friend friend : listOfFriends) {
+            allFriends.add(friend);
+        }
+        return allFriends;
+    }
+
 
 
 
