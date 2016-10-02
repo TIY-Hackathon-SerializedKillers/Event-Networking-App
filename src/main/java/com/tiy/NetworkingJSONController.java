@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,6 +38,8 @@ public class NetworkingJSONController {
         users.save(newUser);
 
         User retrievedUser = users.findOne(newUser.getId());
+//        HashMap<User, String> myHashMap = new HashMap<>();
+//        retrievedUser.setListOfPeopleAndStatusForSeeingMyStuff(myHashMap);
         LoginContainer myLoginContainer;
         if (retrievedUser == null) {
             myLoginContainer = new LoginContainer("Could not create user", null);
@@ -287,6 +290,7 @@ public class NetworkingJSONController {
     // What we need from Dan: FriendConnectionContainer with int userId and int userWhoWantsToBeFriendId
     @RequestMapping(path = "/requestContact.json", method = RequestMethod.POST)
     public RequestContactContainer requestContact(@RequestBody FriendConnectionContainer friendConnectionContainer) {
+//    public User requestContact(@RequestBody FriendConnectionContainer friendConnectionContainer) {
         int userId = friendConnectionContainer.getUserId();
         int userWhoWantsToBeFriendId = friendConnectionContainer.getUserWhoWantsToBeFriendId();
 
@@ -302,8 +306,20 @@ public class NetworkingJSONController {
             usersWhoWantYourContactInfo.add(currentFriendUser);
         }
 
+//        ArrayList<User> usersWhoWantYourContactInfo = new ArrayList<>();
+//        HashMap<User, String> userHashMap = new HashMap<>();
+//        Iterable<NotificationConnection> allNotificationConnectionsForUser = notificationConnections.findAllByUserId(userId);
+//        for (NotificationConnection currentNotificationConnection : allNotificationConnectionsForUser) {
+//            int currentFriendId = currentNotificationConnection.getFriendId();
+//            User currentFriendUser = users.findOne(currentFriendId);
+//            userHashMap.put(currentFriendUser, "pending");
+//        }
+
+//        userWhoGetsNotification.setListOfPeopleAndStatusForSeeingMyStuff(userHashMap);
+
         RequestContactContainer myReturnContainer = new RequestContactContainer(userWhoGetsNotification, usersWhoWantYourContactInfo);
 
+//        return userWhoGetsNotification;
         return myReturnContainer;
     }
 

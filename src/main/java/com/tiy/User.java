@@ -2,6 +2,7 @@ package com.tiy;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by jessicatracy on 9/29/16.
@@ -29,10 +30,14 @@ public class User {
     String techSkills;
 
 //    @Column
-//    ArrayList<User> usersWhoIHaveNotificationsFrom = new ArrayList<>();
+    ArrayList<User> usersWhoIHaveNotificationsFrom = new ArrayList<>();
 
 //    @ManyToOne
 //    UserEvent userEvent;
+
+    ArrayList<User> listOfPeopleWhoCanSeeMyStuff = new ArrayList<>();
+
+//    HashMap<User, String> listOfPeopleAndStatusForSeeingMyStuff = new HashMap<>();
 
     public User() {
     }
@@ -99,11 +104,27 @@ public class User {
         this.techSkills = techSkills;
     }
 
-//    public ArrayList<User> getUsersWhoIHaveNotificationsFrom() {
-//        return usersWhoIHaveNotificationsFrom;
+    public ArrayList<User> getUsersWhoIHaveNotificationsFrom() {
+        return usersWhoIHaveNotificationsFrom;
+    }
+
+    public void setUsersWhoIHaveNotificationsFrom(ArrayList<User> usersWhoIHaveNotificationsFrom) {
+        this.usersWhoIHaveNotificationsFrom = usersWhoIHaveNotificationsFrom;
+    }
+
+    public ArrayList<User> getListOfPeopleWhoCanSeeMyStuff() {
+        return listOfPeopleWhoCanSeeMyStuff;
+    }
+
+    public void setListOfPeopleWhoCanSeeMyStuff(ArrayList<User> listOfPeopleWhoCanSeeMyStuff) {
+        this.listOfPeopleWhoCanSeeMyStuff = listOfPeopleWhoCanSeeMyStuff;
+    }
+
+//    public HashMap<User, String> getListOfPeopleAndStatusForSeeingMyStuff() {
+//        return listOfPeopleAndStatusForSeeingMyStuff;
 //    }
 //
-//    public void setUsersWhoIHaveNotificationsFrom(ArrayList<User> usersWhoIHaveNotificationsFrom) {
-//        this.usersWhoIHaveNotificationsFrom = usersWhoIHaveNotificationsFrom;
+//    public void setListOfPeopleAndStatusForSeeingMyStuff(HashMap<User, String> listOfPeopleAndStatusForSeeingMyStuff) {
+//        this.listOfPeopleAndStatusForSeeingMyStuff = listOfPeopleAndStatusForSeeingMyStuff;
 //    }
 }

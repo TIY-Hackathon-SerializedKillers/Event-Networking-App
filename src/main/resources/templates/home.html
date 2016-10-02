@@ -91,7 +91,7 @@ Test -- Request contact info from someone! This means I should be added to their
 My user ID: <input type="number" ng-model="myUserIdRequestContact"/> <br/>
 Their user ID: <input type="number" ng-model="theirUserIdRequestContact"/> <br/>
 <input type="button" ng-click="requestContact(myUserIdRequestContact, theirUserIdRequestContact)" value="Request"/> <br/>
-User who gets notification: {{requestContactResponse.userGettingNotification}}
+User who gets notification: {{requestContactResponse.userGettingNotification.firstName}} {{requestContactResponse.userGettingNotification.lastName}}
 List of users who want to contact this user: {{requestContactResponse.usersRequestingContact}} <br/><br/>
 
 
