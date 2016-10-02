@@ -289,6 +289,15 @@ public class NetworkingJSONController {
         return allFriends;
     }
 
+    //When user gets a notification, and wants to give the other person their email, go to this endpoint.
+    //It will add the other person to their list of friends.
+    //It will just give Dan back a message that says successful or not.
+    //What we need from Dan: container holding int userId, int wantToBeFriendId
+//    @RequestMapping(path = "/addToMyFriendList.json")
+//    public String addToMyFriendList() {
+//
+//    }
+
 
 
 

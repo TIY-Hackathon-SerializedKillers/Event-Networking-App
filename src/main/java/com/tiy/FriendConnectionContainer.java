@@ -5,14 +5,15 @@ package com.tiy;
  */
 public class FriendConnectionContainer {
     int userId;
-    int friendId;
+    int userWhoWantsToBeFriendId;
 
     public FriendConnectionContainer() {
+
     }
 
-    public FriendConnectionContainer(int userId, int friendId) {
+    public FriendConnectionContainer(int userId, int userWhoWantsToBeFriendId) {
         this.userId = userId;
-        this.friendId = friendId;
+        this.userWhoWantsToBeFriendId = userWhoWantsToBeFriendId;
     }
 
     //Getters and setters
@@ -25,10 +26,10 @@ public class FriendConnectionContainer {
     }
 
     public int getFriendId() {
-        return friendId;
+        return userWhoWantsToBeFriendId;
     }
 
-    public void setFriendId(int friendId) {
-        this.friendId = friendId;
+    public void setFriendId(int userWhoWantsToBeFriendId) {
+        this.userWhoWantsToBeFriendId = userWhoWantsToBeFriendId;
     }
 }
