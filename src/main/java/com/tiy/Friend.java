@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "friends")
-public class Friend extends User {
+public class Friend{
     @Id
     @GeneratedValue
     int id;
@@ -23,7 +23,7 @@ public class Friend extends User {
 
     public Friend(User user) {
         this.user = user;
-        this.friend = this;
+//        this.friend = this;
     }
 
     //Getters and setters

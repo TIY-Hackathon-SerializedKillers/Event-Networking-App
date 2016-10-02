@@ -232,7 +232,7 @@ public class NetworkingJSONController {
         // current user is seeing if they are on friend list of friend
         User requesterUser = users.findOne(friendConnectionContainer.userId);
         User requesteeFriend = users.findOne(friendConnectionContainer.friendId);
-   
+
         LoginContainer myContainer = new LoginContainer();
         boolean noAccess = true;
 
