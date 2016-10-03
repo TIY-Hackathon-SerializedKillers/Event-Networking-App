@@ -30,12 +30,12 @@ public class User {
     String techSkills;
 
 //    @Column
-    ArrayList<User> usersWhoIHaveNotificationsFrom = new ArrayList<>();
+//    ArrayList<User> usersWhoIHaveFriendRequestsFrom = new ArrayList<>();
 
 //    @ManyToOne
 //    UserEvent userEvent;
 
-    ArrayList<User> listOfPeopleWhoCanSeeMyStuff = new ArrayList<>();
+//    ArrayList<User> listOfPeopleWhoCanSeeMyStuff = new ArrayList<>();
 
 //    HashMap<User, String> listOfPeopleAndStatusForSeeingMyStuff = new HashMap<>();
 
@@ -104,21 +104,21 @@ public class User {
         this.techSkills = techSkills;
     }
 
-    public ArrayList<User> getUsersWhoIHaveNotificationsFrom() {
-        return usersWhoIHaveNotificationsFrom;
-    }
-
-    public void setUsersWhoIHaveNotificationsFrom(ArrayList<User> usersWhoIHaveNotificationsFrom) {
-        this.usersWhoIHaveNotificationsFrom = usersWhoIHaveNotificationsFrom;
-    }
-
-    public ArrayList<User> getListOfPeopleWhoCanSeeMyStuff() {
-        return listOfPeopleWhoCanSeeMyStuff;
-    }
-
-    public void setListOfPeopleWhoCanSeeMyStuff(ArrayList<User> listOfPeopleWhoCanSeeMyStuff) {
-        this.listOfPeopleWhoCanSeeMyStuff = listOfPeopleWhoCanSeeMyStuff;
-    }
+//    public ArrayList<User> getUsersWhoIHaveFriendRequestsFrom() {
+//        return usersWhoIHaveFriendRequestsFrom;
+//    }
+//
+//    public void setUsersWhoIHaveFriendRequestsFrom(ArrayList<User> usersWhoIHaveFriendRequestsFrom) {
+//        this.usersWhoIHaveFriendRequestsFrom = usersWhoIHaveFriendRequestsFrom;
+//    }
+//
+//    public ArrayList<User> getListOfPeopleWhoCanSeeMyStuff() {
+//        return listOfPeopleWhoCanSeeMyStuff;
+//    }
+//
+//    public void setListOfPeopleWhoCanSeeMyStuff(ArrayList<User> listOfPeopleWhoCanSeeMyStuff) {
+//        this.listOfPeopleWhoCanSeeMyStuff = listOfPeopleWhoCanSeeMyStuff;
+//    }
 
 //    public HashMap<User, String> getListOfPeopleAndStatusForSeeingMyStuff() {
 //        return listOfPeopleAndStatusForSeeingMyStuff;

@@ -73,7 +73,8 @@ Add this person to my friend list so that they can see my email: <br/>
 My user ID: <input type="number" ng-model="myUserIdAllow"/> <br/>
 Person who is requesting to be my friend's ID: <input type="number" ng-model="friendUserIdAllow"/> <br/>
 <input type="button" ng-click="addToMyFriendList(myUserIdAllow, friendUserIdAllow)" value="Update"/> <br/>
-User who is now on my friend list: {{addToMyFriendListUser.firstName}} {{addToMyFriendListUser.lastName}} <br/><br/>
+User whose friend list was just updated: {{addToMyFriendListUser.firstName}} {{addToMyFriendListUser.lastName}} <br/>
+Users on my friend list: {{addToMyFriendListUser.listOfPeopleWhoCanSeeMyStuff}}<br/>
 
 
 <br/><br/><br/><br/><br/>

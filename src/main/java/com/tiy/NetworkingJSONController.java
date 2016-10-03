@@ -325,13 +325,14 @@ public class NetworkingJSONController {
 
     //When user gets a notification, and wants to give the other person their email, go to this endpoint.
     //It will add the other person to their list of friends.
-    //It will just give Dan back a message that says successful or not.
+    //It will give back the friend user object
     //What we need from Dan: container holding int userId, int userWhoWantsToBeFriendId
     @RequestMapping(path = "/addToMyFriendList.json")
     public User addToMyFriendList(@RequestBody FriendConnectionContainer friendConnectionContainer) {
         int userId = friendConnectionContainer.getUserId();
         int userWhoWantsToBeFriendId = friendConnectionContainer.getUserWhoWantsToBeFriendId();
 
+        User currentUser = users.findOne(userId);
         User friendUser = users.findOne(userWhoWantsToBeFriendId);
         Friend newFriend;
 
@@ -340,6 +341,8 @@ public class NetworkingJSONController {
             friends.save(newFriend);
             System.out.println("User added to your friend list: " + friendUser.getFirstName());
             System.out.println("New friend in database with id: " + newFriend.getId());
+
+//            updateUsersListOfPeopleWhoCanSeeMyStuff(currentUser);
 
             //delete from notificationconnection table since connection has been made
             NotificationConnection thisNotificationConnection = notificationConnections.findByUserIdAndFriendId(userId, userWhoWantsToBeFriendId);
@@ -370,6 +373,17 @@ public class NetworkingJSONController {
         }
         return allFriends;
     }
+
+//    public void updateUsersListOfPeopleWhoCanSeeMyStuff(User currentUser) {
+//        Iterable<Friend> allFriendsByCurrentUser = friends.findAllByUserId(currentUser.getId());
+//        ArrayList<User> allUsersFriends = new ArrayList<>();
+//        for (Friend currentFriend : allFriendsByCurrentUser) {
+//            int currentFriendId = currentFriend.getFriendId();
+//            User currentFriendUser = users.findOne(currentFriendId);
+//            allUsersFriends.add(currentFriendUser);
+//        }
+//        currentUser.setListOfPeopleWhoCanSeeMyStuff(allUsersFriends);
+//    }
 
 
 
