@@ -348,7 +348,6 @@ public class NetworkingJSONController {
             NotificationConnection thisNotificationConnection = notificationConnections.findByUserIdAndFriendId(userId, userWhoWantsToBeFriendId);
             notificationConnections.delete(thisNotificationConnection.getId());
         }
-
         return friendUser;
     }
 
